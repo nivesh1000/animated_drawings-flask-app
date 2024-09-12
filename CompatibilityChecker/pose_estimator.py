@@ -1,6 +1,4 @@
 from crop import crop_image
-import json
-import warnings
 from drawn_humanoid_pose_estimator.mmpose_handler import MMPoseHandler
 import cv2
 import numpy as np
