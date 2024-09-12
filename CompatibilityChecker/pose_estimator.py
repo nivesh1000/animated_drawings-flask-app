@@ -36,8 +36,6 @@ def pose_estimator(datafile, image_path):
 
     # Postprocess the results
     postprocessed_results = handler.postprocess(inference_results)
-    # Print the results
-    # print(json.dumps(postprocessed_results, indent=2))
 
     pose_results = postprocessed_results[0]
   
@@ -69,7 +67,6 @@ def pose_estimator(datafile, image_path):
     with open(str('CompatibilityChecker/drawn_humanoid_pose_estimator/output_files/char_cfg.yaml'), 'w') as f:
         yaml.dump(char_cfg, f)
     print("--Configuration file created.")
-    # create joint viz overlay for inspection purposes
     joint_overlay = cropped.copy()
     for joint in skeleton:
         x, y = joint['loc']
