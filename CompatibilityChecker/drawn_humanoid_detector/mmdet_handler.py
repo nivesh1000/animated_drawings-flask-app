@@ -33,8 +33,6 @@ class MMdetHandler(BaseHandler):
 
         for row in data:
             image = row.get('data')
-            # if isinstance(image, str):
-            #     image = base64.b64decode(image)
             image = mmcv.imfrombytes(image)
             images.append(image)
         return images
@@ -46,16 +44,14 @@ class MMdetHandler(BaseHandler):
     def postprocess(self, data):
         output = []
         for image_result in data:
-            output.append([])
             bbox_result, _= image_result
             class_name = self.model.CLASSES[0]
             bbox_coords=bbox_result[0][0][:-1].tolist()
             score=bbox_result[0][0][-1]
             if score >= self.threshold:
-                output[0].append({
+                output.append({
                     'class_name': class_name,
                     'bbox': bbox_coords,
                     'score': score
                 })
-
         return output

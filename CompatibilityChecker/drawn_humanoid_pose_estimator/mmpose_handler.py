@@ -59,5 +59,4 @@ class MMPoseHandler(BaseHandler):
         output = [[{
             'keypoints': pred['keypoints'].tolist()
         } for pred in preds] for preds in data]
-
         return output

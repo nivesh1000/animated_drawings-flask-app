@@ -36,7 +36,6 @@ def pose_estimator(datafile, image_path):
 
     # Postprocess the results
     postprocessed_results = handler.postprocess(inference_results)
-
     # Print the results
     # print(json.dumps(postprocessed_results, indent=2))
 
