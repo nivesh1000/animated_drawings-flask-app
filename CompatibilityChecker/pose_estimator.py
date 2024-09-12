@@ -1,13 +1,11 @@
 from crop import crop_image
 import json
 import warnings
-from drawn_humanoid_pose_estimator.mmpose_handler import MMPoseHandler  # Assuming the class is saved in mmpose_handler.py
+from drawn_humanoid_pose_estimator.mmpose_handler import MMPoseHandler
 import cv2
 import numpy as np
 import yaml
 
-
-# Define a mock context with necessary properties
 class Context:
     def __init__(self):
         self.system_properties = {
@@ -16,7 +14,7 @@ class Context:
         }
         self.manifest = {
             'model': {
-                'serializedFile': 'best_AP_epoch_72.pth'  # Replace with the actual model file
+                'serializedFile': 'best_AP_epoch_72.pth'
             }
         }
 def pose_estimator(datafile, image_path):
