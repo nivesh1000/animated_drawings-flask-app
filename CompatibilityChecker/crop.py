@@ -10,7 +10,5 @@ def crop_image(detection_results,image_path):
 
     # crop the image
     cropped = img[t:b, l:r]
-    # send cropped image to pose estimator
-    data_file = [{'data': cv2.imencode('.png', cropped)[1].tobytes()}]
     cv2.imwrite('CompatibilityChecker/drawn_humanoid_pose_estimator/output_files/texture.png', cropped)
     return cropped
