@@ -11,8 +11,8 @@ import yaml
 class Context:
     def __init__(self):
         self.system_properties = {
-            'model_dir': 'CompatibilityChecker/drawn_humanoid_pose_estimator/',  # Replace with actual path
-            'gpu_id': 0  # Assuming GPU ID is 0, modify as needed
+            'model_dir': 'CompatibilityChecker/drawn_humanoid_pose_estimator/',
+            'gpu_id': 0
         }
         self.manifest = {
             'model': {
