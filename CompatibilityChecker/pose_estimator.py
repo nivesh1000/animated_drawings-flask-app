@@ -63,7 +63,6 @@ def pose_estimator(datafile, image_path):
 
     char_cfg = {'skeleton': skeleton, 'height': cropped.shape[0], 'width': cropped.shape[1]}
 
-    # dump character config to yaml
     with open(str('CompatibilityChecker/drawn_humanoid_pose_estimator/output_files/char_cfg.yaml'), 'w') as f:
         yaml.dump(char_cfg, f)
     print("--Configuration file created.")
