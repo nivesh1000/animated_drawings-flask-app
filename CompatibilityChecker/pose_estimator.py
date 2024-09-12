@@ -24,10 +24,6 @@ def pose_estimator(datafile, image_path):
     context = Context()
     handler = MMPoseHandler()
     handler.initialize(context)
-    
-    # Assuming `datafile` contains the base64-encoded image data, no need to read from a file.
-    # datafile should be in the form of a base64-encoded string.
-    # Mock input data
 
     cropped=crop_image(datafile, image_path)
     data = [{'data': cv2.imencode('.png', cropped)[1].tobytes()}]

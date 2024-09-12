@@ -44,20 +44,18 @@ class MMdetHandler(BaseHandler):
         return results
 
     def postprocess(self, data):
-        # Format output following the example ObjectDetectionHandler format
         output = []
         for image_result in data:
             output.append([])
             bbox_result, _= image_result
             class_name = self.model.CLASSES[0]
-            for bbox in bbox_result[0]:
-                bbox_coords = bbox[:-1].tolist()    
-                score = float(bbox[-1])
-                if score >= self.threshold:
-                    output[0].append({
-                        'class_name': class_name,
-                        'bbox': bbox_coords,
-                        'score': score
-                    })
+            bbox_coords=bbox_result[0][0][:-1].tolist()
+            score=bbox_result[0][0][-1]
+            if score >= self.threshold:
+                output[0].append({
+                    'class_name': class_name,
+                    'bbox': bbox_coords,
+                    'score': score
+                })
 
         return output
