@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 def crop_image(detection_results,image_path):
     img = cv2.imread(image_path)
