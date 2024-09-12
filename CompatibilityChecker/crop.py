@@ -1,0 +1,16 @@
+import cv2
+import numpy as np
+
+def crop_image(detection_results,image_path):
+    img = cv2.imread(image_path)
+
+    # calculate the coordinates of the character bounding box
+    bbox = np.array(detection_results[0]['bbox'])
+    l, t, r, b = [round(x) for x in bbox]
+
+    # crop the image
+    cropped = img[t:b, l:r]
+    # send cropped image to pose estimator
+    data_file = [{'data': cv2.imencode('.png', cropped)[1].tobytes()}]
+    cv2.imwrite('CompatibilityChecker/drawn_humanoid_pose_estimator/output_files/texture.png', cropped)
+    return cropped
