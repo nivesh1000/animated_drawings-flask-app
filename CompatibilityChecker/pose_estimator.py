@@ -1,22 +1,18 @@
-from crop import crop_image
-import json
-import warnings
-from drawn_humanoid_pose_estimator.mmpose_handler import MMPoseHandler  # Assuming the class is saved in mmpose_handler.py
+from utils.crop import crop_image
+from drawn_humanoid_pose_estimator.mmpose_handler import MMPoseHandler
 import cv2
 import numpy as np
 import yaml
 
-
-# Define a mock context with necessary properties
 class Context:
     def __init__(self):
         self.system_properties = {
-            'model_dir': 'CompatibilityChecker/drawn_humanoid_pose_estimator/',  # Replace with actual path
-            'gpu_id': 0  # Assuming GPU ID is 0, modify as needed
+            'model_dir': 'CompatibilityChecker/drawn_humanoid_pose_estimator/',
+            'gpu_id': 0
         }
         self.manifest = {
             'model': {
-                'serializedFile': 'best_AP_epoch_72.pth'  # Replace with the actual model file
+                'serializedFile': 'best_AP_epoch_72.pth'
             }
         }
 def pose_estimator(datafile, image_path):
@@ -35,16 +31,11 @@ def pose_estimator(datafile, image_path):
     inference_results = handler.inference(preprocessed_data)
 
     # Postprocess the results
-    postprocessed_results = handler.postprocess(inference_results)
-
-    # Print the results
-    # print(json.dumps(postprocessed_results, indent=2))
-
-    pose_results = postprocessed_results[0]
-  
+    pose_results = handler.postprocess(inference_results)
 
     # get x y coordinates of detection joint keypoints
     kpts = np.array(pose_results[0]['keypoints'])[:, :2]
+    
     # use them to build character skeleton
     skeleton = []
     skeleton.append({'loc' : [round(x) for x in (kpts[11]+kpts[12])/2], 'name': 'root'          , 'parent': None})
@@ -66,11 +57,9 @@ def pose_estimator(datafile, image_path):
 
     char_cfg = {'skeleton': skeleton, 'height': cropped.shape[0], 'width': cropped.shape[1]}
 
-    # dump character config to yaml
     with open(str('CompatibilityChecker/drawn_humanoid_pose_estimator/output_files/char_cfg.yaml'), 'w') as f:
         yaml.dump(char_cfg, f)
     print("--Configuration file created.")
-    # create joint viz overlay for inspection purposes
     joint_overlay = cropped.copy()
     for joint in skeleton:
         x, y = joint['loc']

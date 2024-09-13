@@ -1,11 +1,9 @@
 import cv2
-import numpy as np
 
 def crop_image(detection_results,image_path):
     img = cv2.imread(image_path)
 
-    # calculate the coordinates of the character bounding box
-    bbox = np.array(detection_results[0]['bbox'])
+    bbox = detection_results[0]['bbox']
     l, t, r, b = [round(x) for x in bbox]
 
     # crop the image
