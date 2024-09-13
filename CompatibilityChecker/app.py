@@ -7,7 +7,7 @@ def main() -> None:
     their pose. The image is read from a file, and results are processed
     using the `detection` and `pose_estimator` functions.
     """
-    image_path = 'CompatibilityChecker/drawn_humanoid_detector/wood.jpg'
+    image_path = 'CompatibilityChecker/drawn_humanoid_detector/image1.jpg'
     
     with open(image_path, 'rb') as image_file:
         image = image_file.read()
