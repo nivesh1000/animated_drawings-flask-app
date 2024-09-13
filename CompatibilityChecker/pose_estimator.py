@@ -1,4 +1,4 @@
-from crop import crop_image
+from utils.crop import crop_image
 from drawn_humanoid_pose_estimator.mmpose_handler import MMPoseHandler
 import cv2
 import numpy as np
@@ -31,13 +31,11 @@ def pose_estimator(datafile, image_path):
     inference_results = handler.inference(preprocessed_data)
 
     # Postprocess the results
-    postprocessed_results = handler.postprocess(inference_results)
-
-    pose_results = postprocessed_results[0]
-  
+    pose_results = handler.postprocess(inference_results)
 
     # get x y coordinates of detection joint keypoints
     kpts = np.array(pose_results[0]['keypoints'])[:, :2]
+    
     # use them to build character skeleton
     skeleton = []
     skeleton.append({'loc' : [round(x) for x in (kpts[11]+kpts[12])/2], 'name': 'root'          , 'parent': None})

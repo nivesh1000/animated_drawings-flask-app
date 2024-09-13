@@ -34,29 +34,25 @@ class MMPoseHandler(BaseHandler):
         self.initialized = True
 
     def preprocess(self, data):
-        images = []
+        image = []
+        imagebytes = data[0].get('data')
+        imagemmcv = mmcv.imfrombytes(imagebytes)
+        image.append(imagemmcv)
 
-        for row in data:
-            image = row.get('data')
-            image = mmcv.imfrombytes(image)
-            images.append(image)
-
-        return images
+        return image
 
     def inference(self, data):
         results = self._inference_top_down_pose_model(data)
         return results
 
     def _inference_top_down_pose_model(self, data):
-        results = []
         for image in data:
             preds, _ = inference_top_down_pose_model(
-                self.model, image, person_results=None)
-            results.append(preds)
-        return results
+                self.model, image, person_results=None)   
+        return preds
 
     def postprocess(self, data):
-        output = [[{
-            'keypoints': pred['keypoints'].tolist()
-        } for pred in preds] for preds in data]
+        output=[]
+        output.append({'keypoints':data[0]['keypoints']})
         return output
+

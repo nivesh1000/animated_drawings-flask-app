@@ -10,9 +10,10 @@ def main() -> None:
     image_path = 'CompatibilityChecker/drawn_humanoid_detector/wood.jpg'
     
     with open(image_path, 'rb') as image_file:
-        image_bytes = image_file.read()
+        image = image_file.read()
 
-    results = detection(image_bytes)
+    # Sending the binary string of image.
+    results = detection(image)
     
     if len(results) == 0:
         print("--No humanoid figure detected.")

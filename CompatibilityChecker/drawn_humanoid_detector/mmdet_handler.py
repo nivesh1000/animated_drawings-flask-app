@@ -29,13 +29,11 @@ class MMdetHandler(BaseHandler):
         self.initialized = True
 
     def preprocess(self, data):
-        images = []
-
-        for row in data:
-            image = row.get('data')
-            image = mmcv.imfrombytes(image)
-            images.append(image)
-        return images
+        image = []
+        imagebytes = data[0].get('data')
+        imagemmcv = mmcv.imfrombytes(imagebytes)
+        image.append(imagemmcv)
+        return image
 
     def inference(self, data):
         results = inference_detector(self.model, data)
@@ -43,15 +41,12 @@ class MMdetHandler(BaseHandler):
 
     def postprocess(self, data):
         output = []
-        for image_result in data:
-            bbox_result, _= image_result
-            class_name = self.model.CLASSES[0]
-            bbox_coords=bbox_result[0][0][:-1].tolist()
-            score=bbox_result[0][0][-1]
-            if score >= self.threshold:
-                output.append({
-                    'class_name': class_name,
-                    'bbox': bbox_coords,
-                    'score': score
-                })
+        bbox_result, _= data[0]
+        bbox_coords=bbox_result[0][0][:-1]
+        score=bbox_result[0][0][-1]
+        if score >= self.threshold:
+            output.append({
+                'bbox': bbox_coords,
+                'score': score
+            })
         return output
