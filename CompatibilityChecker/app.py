@@ -12,7 +12,7 @@ def main() -> None:
     with open(image_path, 'rb') as image_file:
         image = image_file.read()
 
-    # Sending the binary string of image.
+    # Sending the binary string of image for humanoid figure detection.
     results = detection(image)
     
     if len(results) == 0:

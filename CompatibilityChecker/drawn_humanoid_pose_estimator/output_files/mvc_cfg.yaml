@@ -1,0 +1,8 @@
+controller:
+  MODE: video_render
+  OUTPUT_VIDEO_PATH: CompatibilityChecker/drawn_humanoid_pose_estimator/output_files/video.gif
+scene:
+  ANIMATED_CHARACTERS:
+  - character_cfg: CompatibilityChecker/drawn_humanoid_pose_estimator/output_files/char_cfg.yaml
+    motion_cfg: RenderAnimation/ConfigFiles/config/motion/dab.yaml
+    retarget_cfg: RenderAnimation/ConfigFiles/config/retarget/fair1_spf.yaml
