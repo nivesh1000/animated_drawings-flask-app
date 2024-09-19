@@ -164,3 +164,5 @@ cython_debug/
 CompatibilityChecker/drawn_humanoid_detector/latest.pth
 CompatibilityChecker/drawn_humanoid_pose_estimator/best_AP_epoch_72.pth
 .venv
+characterfiles/*
+!characterfiles/.keep

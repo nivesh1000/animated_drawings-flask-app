@@ -1,9 +1,13 @@
-from drawn_humanoid_detector.mmdet_handler import MMdetHandler
+from CompatibilityChecker.drawn_humanoid_detector.mmdet_handler import MMdetHandler
 
 class Context:
-    def __init__(self):
+    """Context class to store system properties and model configuration
+       to initialize the MMdetHandler object.
+       """
+    
+    def __init__(self) -> None:
         self.system_properties = {
-            'model_dir': 'CompatibilityChecker/drawn_humanoid_detector/' ,
+            'model_dir': 'CompatibilityChecker/drawn_humanoid_detector/',
             'gpu_id': 0
         }
         self.manifest = {
@@ -11,20 +15,26 @@ class Context:
                 'serializedFile': 'latest.pth'
             }
         }
-def detection(image_bytes):
-    #Initialize Context object to initialize model handler
+
+def detection(image_bytes: bytes) -> dict:
+    """
+    Perform detection on the provided image bytes using the MMdetHandler.
+
+    Args:
+        image_bytes (bytes): The image data to be processed.
+
+    Returns:
+        dict: The postprocessed results from the inference.
+    """
+    # Initialize Context object to initialize model handler
     context = Context()
     handler = MMdetHandler()
     handler.initialize(context)
-    
 
     data = [{'data': image_bytes}]
 
     preprocessed_data = handler.preprocess(data)
-
     inference_results = handler.inference(preprocessed_data)
-
     postprocessed_results = handler.postprocess(inference_results)
 
     return postprocessed_results
-  

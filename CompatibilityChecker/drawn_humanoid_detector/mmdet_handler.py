@@ -49,4 +49,5 @@ class MMdetHandler(BaseHandler):
                 'bbox': bbox_coords,
                 'score': score
             })
+        print(output)    
         return output
