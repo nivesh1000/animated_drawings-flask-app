@@ -11,7 +11,7 @@ app.secret_key = '_5#y2L"F4'
 
 
 @app.route('/', methods=['GET', 'POST'])
-def home() -> str:
+def home():
     """
     Renders the home page for file upload. Handles POST request to upload
     and process an image file.
@@ -37,7 +37,7 @@ def home() -> str:
 
 
 @app.route('/options', methods=['GET', 'POST'])
-def index() -> str:
+def index():
     """
     Renders the options page where users select animation configurations.
     """
@@ -45,7 +45,7 @@ def index() -> str:
 
 
 @app.route('/submit', methods=['POST'])
-def submit() -> str:
+def submit():
     """
     Handles form submission for animation options and starts the 
     animation process.
@@ -56,7 +56,7 @@ def submit() -> str:
 
 
 @app.route('/output')
-def output() -> str:
+def output():
     """
     Serves the generated animation (GIF) to the user after processing.
     """

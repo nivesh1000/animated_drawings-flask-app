@@ -1,6 +1,5 @@
 import animated_drawings.render
 import yaml
-from typing import Optional
 
 def annotations_to_animation(users_choice: str) -> None:
     """
@@ -44,7 +43,7 @@ def annotations_to_animation(users_choice: str) -> None:
     }
 
     # Get the animation configuration based on the user's choice
-    animated_drawing_dict: Optional[dict] = animation_configs.get(users_choice)
+    animated_drawing_dict = animation_configs.get(users_choice)
     
     if animated_drawing_dict is None:
         print(f"animated_drawing_dict not initialized properly.")

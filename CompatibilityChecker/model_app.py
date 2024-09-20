@@ -17,28 +17,18 @@ def models(image_path: str) -> int:
             image = image_file.read()
     except FileNotFoundError:
         print(f"Error: File '{image_path}' not found.")
-        return 0
-    except IOError:
-        print(f"Error: Could not read file '{image_path}'.")
-        return 0
 
     try:
         # Attempt to detect humanoid figures in the image
         results = detection(image)
     except Exception as e:
         print(f"Error during humanoid detection: {e}")
-        return 0
 
     if not results:
         print("--No humanoid figure detected.")
         return 0
     else:
-        try:
-            # Attempt to estimate pose if a humanoid is detected
-            print(f"--Humanoid figure detected with score {results[0]['score']}")
-            pose_estimator(results, image_path)
-        except Exception as e:
-            print(f"Error during pose estimation: {e}")
-            return 0
-
+        # Attempt to estimate pose if a humanoid is detected
+        print(f"--Humanoid figure detected with score {results[0]['score']}")
+        pose_estimator(results, image_path)
         return 1
