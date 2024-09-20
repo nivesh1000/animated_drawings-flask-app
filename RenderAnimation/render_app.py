@@ -9,7 +9,11 @@ def annotations_to_animation(users_choice: str) -> None:
     Args:
         users_choice (str): User's choice to determine which animation 
         to create. Valid options are '1', '2', '3', '4', '5'.
-
+        1: Dancing
+        2: Jumping
+        3: Zombie motion
+        4: Wave hello
+        5: Jumping jack
     Returns:
         None
     """
