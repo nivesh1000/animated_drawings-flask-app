@@ -1,8 +1,0 @@
-controller:
-  MODE: video_render
-  OUTPUT_VIDEO_PATH: characterfiles/video.gif
-scene:
-  ANIMATED_CHARACTERS:
-  - character_cfg: characterfiles/char_cfg.yaml
-    motion_cfg: RenderAnimation/animation_configs/config/motion/jesse_dance.yaml
-    retarget_cfg: RenderAnimation/animation_configs/config/retarget/mixamo_fff.yaml

@@ -3,7 +3,7 @@ from CompatibilityChecker.drawn_humanoid_detector.mmdet_handler import MMdetHand
 class Context:
     """Context class to store system properties and model configuration
        to initialize the MMdetHandler object.
-       """
+    """
     
     def __init__(self) -> None:
         self.system_properties = {
@@ -24,17 +24,34 @@ def detection(image_bytes: bytes) -> dict:
         image_bytes (bytes): The image data to be processed.
 
     Returns:
-        dict: The postprocessed results from the inference.
+        dict: The postprocessed results from the inference or an empty dict
+        if an error occurs.
     """
-    # Initialize Context object to initialize model handler
-    context = Context()
-    handler = MMdetHandler()
-    handler.initialize(context)
+    try:
+        # Initialize Context object to initialize model handler
+        context = Context()
+        handler = MMdetHandler()
 
-    data = [{'data': image_bytes}]
+        try:
+            # Attempt to initialize the handler
+            handler.initialize(context)
+        except Exception as e:
+            print(f"Error initializing handler: {e}")
+            return {}
 
-    preprocessed_data = handler.preprocess(data)
-    inference_results = handler.inference(preprocessed_data)
-    postprocessed_results = handler.postprocess(inference_results)
+        data = [{'data': image_bytes}]
 
-    return postprocessed_results
+        try:
+            # Attempt to preprocess, run inference, and postprocess
+            preprocessed_data = handler.preprocess(data)
+            inference_results = handler.inference(preprocessed_data)
+            postprocessed_results = handler.postprocess(inference_results)
+        except Exception as e:
+            print(f"Error during detection process: {e}")
+            return {}
+
+        return postprocessed_results
+
+    except Exception as e:
+        print(f"General error in detection function: {e}")
+        return {}

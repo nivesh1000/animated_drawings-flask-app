@@ -13,7 +13,7 @@ help:
 	@echo "Usage Examples:"
 	@echo "  make virtualenv     - Sets up a new virtual environment and installs dependencies."
 	@echo "  make install        - Installs dependencies into the virtual environment."
-	@echo "  make run ARGS='-q \"hello\"' - Runs main.py with the specified arguments."
+	@echo "  make run            - Runs the flask app."
 	@echo ""
 	@echo "Note: Remember to activate the virtual environment by running: source $(VENV_NAME)/bin/activate"
 
