@@ -1,7 +1,4 @@
-# Copyright (c) OpenMMLab. All rights reserved.
-import base64
 import os
-
 import mmcv
 import torch
 from ts.torch_handler.base_handler import BaseHandler
@@ -48,6 +45,5 @@ class MMdetHandler(BaseHandler):
             output.append({
                 'bbox': bbox_coords,
                 'score': score
-            })
-        print(output)    
+            })  
         return output
