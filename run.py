@@ -32,16 +32,8 @@ def home():
                 )
                 flash(message)
             else:
-                return redirect(url_for('index'))
+                return render_template('options.html')
     return render_template('imageinput.html', message=message)
-
-
-@app.route('/options', methods=['GET', 'POST'])
-def index():
-    """
-    Renders the options page where users select animation configurations.
-    """
-    return render_template('options.html')
 
 
 @app.route('/submit', methods=['POST'])
